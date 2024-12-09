@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
 using EventManagementSystem.APIs;
+using EventManagementSystem.APIs.Common;
 using EventManagementSystem.APIs.Dtos;
 using EventManagementSystem.APIs.Errors;
-using EventManagementSystem.APIs.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EventManagementSystem.APIs;
 
@@ -11,6 +11,7 @@ namespace EventManagementSystem.APIs;
 public abstract class EventsControllerBase : ControllerBase
 {
     protected readonly IEventsService _service;
+
     public EventsControllerBase(IEventsService service)
     {
         _service = service;
@@ -22,16 +23,16 @@ public abstract class EventsControllerBase : ControllerBase
     [HttpPost()]
     public async Task<ActionResult<Event>> CreateEvent(EventCreateInput input)
     {
-        var event = await _service.CreateEvent(input);
-        
-    return CreatedAtAction(nameof(Event), new { id = event.Id }, event); }
+        var eventDbModel = await _service.CreateEvent(input);
+
+        return CreatedAtAction(nameof(Event), new { id = eventDbModel.Id }, eventDbModel);
+    }
 
     /// <summary>
     /// Delete one Event
     /// </summary>
     [HttpDelete("{Id}")]
-    public async Task<ActionResult> DeleteEvent([FromRoute()]
-    EventWhereUniqueInput uniqueId)
+    public async Task<ActionResult> DeleteEvent([FromRoute()] EventWhereUniqueInput uniqueId)
     {
         try
         {
@@ -49,8 +50,7 @@ public abstract class EventsControllerBase : ControllerBase
     /// Find many Events
     /// </summary>
     [HttpGet()]
-    public async Task<ActionResult<List<Event>>> Events([FromQuery()]
-    EventFindManyArgs filter)
+    public async Task<ActionResult<List<Event>>> Events([FromQuery()] EventFindManyArgs filter)
     {
         return Ok(await _service.Events(filter));
     }
@@ -59,8 +59,7 @@ public abstract class EventsControllerBase : ControllerBase
     /// Meta data about Event records
     /// </summary>
     [HttpPost("meta")]
-    public async Task<ActionResult<MetadataDto>> EventsMeta([FromQuery()]
-    EventFindManyArgs filter)
+    public async Task<ActionResult<MetadataDto>> EventsMeta([FromQuery()] EventFindManyArgs filter)
     {
         return Ok(await _service.EventsMeta(filter));
     }
@@ -69,8 +68,7 @@ public abstract class EventsControllerBase : ControllerBase
     /// Get one Event
     /// </summary>
     [HttpGet("{Id}")]
-    public async Task<ActionResult<Event>> Event([FromRoute()]
-    EventWhereUniqueInput uniqueId)
+    public async Task<ActionResult<Event>> Event([FromRoute()] EventWhereUniqueInput uniqueId)
     {
         try
         {
@@ -86,9 +84,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Update one Event
     /// </summary>
     [HttpPatch("{Id}")]
-    public async Task<ActionResult> UpdateEvent([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    EventUpdateInput eventUpdateDto)
+    public async Task<ActionResult> UpdateEvent(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] EventUpdateInput eventUpdateDto
+    )
     {
         try
         {
@@ -106,9 +105,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Connect multiple Feedbacks records to Event
     /// </summary>
     [HttpPost("{Id}/feedbacks")]
-    public async Task<ActionResult> ConnectFeedbacks([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    FeedbackWhereUniqueInput[] feedbacksId)
+    public async Task<ActionResult> ConnectFeedbacks(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] FeedbackWhereUniqueInput[] feedbacksId
+    )
     {
         try
         {
@@ -126,9 +126,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Disconnect multiple Feedbacks records from Event
     /// </summary>
     [HttpDelete("{Id}/feedbacks")]
-    public async Task<ActionResult> DisconnectFeedbacks([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromBody()]
-    FeedbackWhereUniqueInput[] feedbacksId)
+    public async Task<ActionResult> DisconnectFeedbacks(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromBody()] FeedbackWhereUniqueInput[] feedbacksId
+    )
     {
         try
         {
@@ -146,9 +147,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Find multiple Feedbacks records for Event
     /// </summary>
     [HttpGet("{Id}/feedbacks")]
-    public async Task<ActionResult<List<Feedback>>> FindFeedbacks([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    FeedbackFindManyArgs filter)
+    public async Task<ActionResult<List<Feedback>>> FindFeedbacks(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] FeedbackFindManyArgs filter
+    )
     {
         try
         {
@@ -164,9 +166,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Update multiple Feedbacks records for Event
     /// </summary>
     [HttpPatch("{Id}/feedbacks")]
-    public async Task<ActionResult> UpdateFeedbacks([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromBody()]
-    FeedbackWhereUniqueInput[] feedbacksId)
+    public async Task<ActionResult> UpdateFeedbacks(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromBody()] FeedbackWhereUniqueInput[] feedbacksId
+    )
     {
         try
         {
@@ -184,9 +187,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Connect multiple Notifications records to Event
     /// </summary>
     [HttpPost("{Id}/notifications")]
-    public async Task<ActionResult> ConnectNotifications([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    NotificationWhereUniqueInput[] notificationsId)
+    public async Task<ActionResult> ConnectNotifications(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] NotificationWhereUniqueInput[] notificationsId
+    )
     {
         try
         {
@@ -204,9 +208,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Disconnect multiple Notifications records from Event
     /// </summary>
     [HttpDelete("{Id}/notifications")]
-    public async Task<ActionResult> DisconnectNotifications([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromBody()]
-    NotificationWhereUniqueInput[] notificationsId)
+    public async Task<ActionResult> DisconnectNotifications(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromBody()] NotificationWhereUniqueInput[] notificationsId
+    )
     {
         try
         {
@@ -224,9 +229,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Find multiple Notifications records for Event
     /// </summary>
     [HttpGet("{Id}/notifications")]
-    public async Task<ActionResult<List<Notification>>> FindNotifications([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    NotificationFindManyArgs filter)
+    public async Task<ActionResult<List<Notification>>> FindNotifications(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] NotificationFindManyArgs filter
+    )
     {
         try
         {
@@ -242,9 +248,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Update multiple Notifications records for Event
     /// </summary>
     [HttpPatch("{Id}/notifications")]
-    public async Task<ActionResult> UpdateNotifications([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromBody()]
-    NotificationWhereUniqueInput[] notificationsId)
+    public async Task<ActionResult> UpdateNotifications(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromBody()] NotificationWhereUniqueInput[] notificationsId
+    )
     {
         try
         {
@@ -262,9 +269,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Connect multiple ParticipantRegistrations records to Event
     /// </summary>
     [HttpPost("{Id}/participantRegistrations")]
-    public async Task<ActionResult> ConnectParticipantRegistrations([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    ParticipantRegistrationWhereUniqueInput[] participantRegistrationsId)
+    public async Task<ActionResult> ConnectParticipantRegistrations(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] ParticipantRegistrationWhereUniqueInput[] participantRegistrationsId
+    )
     {
         try
         {
@@ -282,9 +290,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Disconnect multiple ParticipantRegistrations records from Event
     /// </summary>
     [HttpDelete("{Id}/participantRegistrations")]
-    public async Task<ActionResult> DisconnectParticipantRegistrations([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromBody()]
-    ParticipantRegistrationWhereUniqueInput[] participantRegistrationsId)
+    public async Task<ActionResult> DisconnectParticipantRegistrations(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromBody()] ParticipantRegistrationWhereUniqueInput[] participantRegistrationsId
+    )
     {
         try
         {
@@ -302,9 +311,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Find multiple ParticipantRegistrations records for Event
     /// </summary>
     [HttpGet("{Id}/participantRegistrations")]
-    public async Task<ActionResult<List<ParticipantRegistration>>> FindParticipantRegistrations([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    ParticipantRegistrationFindManyArgs filter)
+    public async Task<ActionResult<List<ParticipantRegistration>>> FindParticipantRegistrations(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] ParticipantRegistrationFindManyArgs filter
+    )
     {
         try
         {
@@ -320,9 +330,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Update multiple ParticipantRegistrations records for Event
     /// </summary>
     [HttpPatch("{Id}/participantRegistrations")]
-    public async Task<ActionResult> UpdateParticipantRegistrations([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromBody()]
-    ParticipantRegistrationWhereUniqueInput[] participantRegistrationsId)
+    public async Task<ActionResult> UpdateParticipantRegistrations(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromBody()] ParticipantRegistrationWhereUniqueInput[] participantRegistrationsId
+    )
     {
         try
         {
@@ -340,9 +351,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Connect multiple Sessions records to Event
     /// </summary>
     [HttpPost("{Id}/sessions")]
-    public async Task<ActionResult> ConnectSessions([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    SessionWhereUniqueInput[] sessionsId)
+    public async Task<ActionResult> ConnectSessions(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] SessionWhereUniqueInput[] sessionsId
+    )
     {
         try
         {
@@ -360,9 +372,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Disconnect multiple Sessions records from Event
     /// </summary>
     [HttpDelete("{Id}/sessions")]
-    public async Task<ActionResult> DisconnectSessions([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromBody()]
-    SessionWhereUniqueInput[] sessionsId)
+    public async Task<ActionResult> DisconnectSessions(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromBody()] SessionWhereUniqueInput[] sessionsId
+    )
     {
         try
         {
@@ -380,9 +393,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Find multiple Sessions records for Event
     /// </summary>
     [HttpGet("{Id}/sessions")]
-    public async Task<ActionResult<List<Session>>> FindSessions([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromQuery()]
-    SessionFindManyArgs filter)
+    public async Task<ActionResult<List<Session>>> FindSessions(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromQuery()] SessionFindManyArgs filter
+    )
     {
         try
         {
@@ -398,9 +412,10 @@ public abstract class EventsControllerBase : ControllerBase
     /// Update multiple Sessions records for Event
     /// </summary>
     [HttpPatch("{Id}/sessions")]
-    public async Task<ActionResult> UpdateSessions([FromRoute()]
-    EventWhereUniqueInput uniqueId, [FromBody()]
-    SessionWhereUniqueInput[] sessionsId)
+    public async Task<ActionResult> UpdateSessions(
+        [FromRoute()] EventWhereUniqueInput uniqueId,
+        [FromBody()] SessionWhereUniqueInput[] sessionsId
+    )
     {
         try
         {
@@ -413,5 +428,4 @@ public abstract class EventsControllerBase : ControllerBase
 
         return NoContent();
     }
-
 }

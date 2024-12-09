@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
 using EventManagementSystem.APIs;
+using EventManagementSystem.APIs.Common;
 using EventManagementSystem.APIs.Dtos;
 using EventManagementSystem.APIs.Errors;
-using EventManagementSystem.APIs.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EventManagementSystem.APIs;
 
@@ -11,6 +11,7 @@ namespace EventManagementSystem.APIs;
 public abstract class SessionsControllerBase : ControllerBase
 {
     protected readonly ISessionsService _service;
+
     public SessionsControllerBase(ISessionsService service)
     {
         _service = service;
@@ -31,8 +32,7 @@ public abstract class SessionsControllerBase : ControllerBase
     /// Delete one Session
     /// </summary>
     [HttpDelete("{Id}")]
-    public async Task<ActionResult> DeleteSession([FromRoute()]
-    SessionWhereUniqueInput uniqueId)
+    public async Task<ActionResult> DeleteSession([FromRoute()] SessionWhereUniqueInput uniqueId)
     {
         try
         {
@@ -50,8 +50,9 @@ public abstract class SessionsControllerBase : ControllerBase
     /// Find many Sessions
     /// </summary>
     [HttpGet()]
-    public async Task<ActionResult<List<Session>>> Sessions([FromQuery()]
-    SessionFindManyArgs filter)
+    public async Task<ActionResult<List<Session>>> Sessions(
+        [FromQuery()] SessionFindManyArgs filter
+    )
     {
         return Ok(await _service.Sessions(filter));
     }
@@ -60,8 +61,9 @@ public abstract class SessionsControllerBase : ControllerBase
     /// Meta data about Session records
     /// </summary>
     [HttpPost("meta")]
-    public async Task<ActionResult<MetadataDto>> SessionsMeta([FromQuery()]
-    SessionFindManyArgs filter)
+    public async Task<ActionResult<MetadataDto>> SessionsMeta(
+        [FromQuery()] SessionFindManyArgs filter
+    )
     {
         return Ok(await _service.SessionsMeta(filter));
     }
@@ -70,8 +72,7 @@ public abstract class SessionsControllerBase : ControllerBase
     /// Get one Session
     /// </summary>
     [HttpGet("{Id}")]
-    public async Task<ActionResult<Session>> Session([FromRoute()]
-    SessionWhereUniqueInput uniqueId)
+    public async Task<ActionResult<Session>> Session([FromRoute()] SessionWhereUniqueInput uniqueId)
     {
         try
         {
@@ -87,9 +88,10 @@ public abstract class SessionsControllerBase : ControllerBase
     /// Update one Session
     /// </summary>
     [HttpPatch("{Id}")]
-    public async Task<ActionResult> UpdateSession([FromRoute()]
-    SessionWhereUniqueInput uniqueId, [FromQuery()]
-    SessionUpdateInput sessionUpdateDto)
+    public async Task<ActionResult> UpdateSession(
+        [FromRoute()] SessionWhereUniqueInput uniqueId,
+        [FromQuery()] SessionUpdateInput sessionUpdateDto
+    )
     {
         try
         {
@@ -107,10 +109,11 @@ public abstract class SessionsControllerBase : ControllerBase
     /// Get a event record for Session
     /// </summary>
     [HttpGet("{Id}/event")]
-    public async Task<ActionResult<List<Event>>> GetEvent([FromRoute()]
-    SessionWhereUniqueInput uniqueId)
+    public async Task<ActionResult<List<Event>>> GetEvent(
+        [FromRoute()] SessionWhereUniqueInput uniqueId
+    )
     {
-        var event = await _service.GetEvent(uniqueId);
-            return Ok(event); }
-
+        var eventDbModel = await _service.GetEvent(uniqueId);
+        return Ok(eventDbModel);
+    }
 }

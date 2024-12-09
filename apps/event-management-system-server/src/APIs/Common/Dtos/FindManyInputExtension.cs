@@ -1,3 +1,5 @@
+using System.Collections.Generic; // Добавлено для IEnumerable
+using System.Linq;
 using System.Linq.Dynamic.Core;
 
 namespace EventManagementSystem.APIs.Common;
@@ -60,13 +62,17 @@ public static class FindManyInputExtension
             return query;
         }
 
-        string[] orderByStatements = [];
+        var orderByStatements = new List<string>(); // Используем List для удобства
         foreach (var sortByInput in sortBy)
         {
             var inputParts = sortByInput.Split(':');
-            var fieldName = inputParts.First();
-            var sortDirection =
-                inputParts.Last() == "desc" ? SortDirection.Desc : SortDirection.Asc;
+            if (inputParts.Length < 2) // Проверка на количество элементов
+            {
+                continue;
+            }
+
+            var fieldName = inputParts[0];
+            var sortDirection = inputParts[1] == "desc" ? "desc" : "asc"; // Упрощаем
 
             var propertyInfo = typeof(M).GetProperty(fieldName);
             if (propertyInfo == null)
@@ -74,19 +80,9 @@ public static class FindManyInputExtension
                 continue;
             }
 
-            switch (sortDirection)
-            {
-                case SortDirection.Asc:
-                    orderByStatements = orderByStatements.Append(fieldName).ToArray();
-                    break;
-                case SortDirection.Desc:
-                    orderByStatements = orderByStatements.Append($"{fieldName} desc").ToArray();
-                    break;
-                default:
-                    break;
-            }
+            orderByStatements.Add(sortDirection == "desc" ? $"{fieldName} desc" : fieldName);
         }
 
-        return query.OrderBy(String.Join(", ", orderByStatements));
+        return query.OrderBy(string.Join(", ", orderByStatements));
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic; // Добавлено для IEnumerable
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
@@ -13,10 +14,8 @@ public class RegularExpressionEnumerable : RegularExpressionAttribute
         if (value == null)
             return true;
 
-        if (value is not IEnumerable<string>)
+        if (value is not IEnumerable<string> values)
             return false;
-
-        IEnumerable<string> values = value as IEnumerable<string> ?? [];
 
         foreach (var val in values)
         {

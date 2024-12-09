@@ -1,3 +1,4 @@
+using System.Collections.Generic; // Добавлено для IEnumerable
 using EventManagementSystem.APIs.Common.Attributes;
 
 namespace EventManagementSystem.APIs.Common;

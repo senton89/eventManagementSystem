@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
 using EventManagementSystem.APIs;
+using EventManagementSystem.APIs.Common;
 using EventManagementSystem.APIs.Dtos;
 using EventManagementSystem.APIs.Errors;
-using EventManagementSystem.APIs.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EventManagementSystem.APIs;
 
@@ -11,6 +11,7 @@ namespace EventManagementSystem.APIs;
 public abstract class NotificationsControllerBase : ControllerBase
 {
     protected readonly INotificationsService _service;
+
     public NotificationsControllerBase(INotificationsService service)
     {
         _service = service;
@@ -31,8 +32,9 @@ public abstract class NotificationsControllerBase : ControllerBase
     /// Delete one Notification
     /// </summary>
     [HttpDelete("{Id}")]
-    public async Task<ActionResult> DeleteNotification([FromRoute()]
-    NotificationWhereUniqueInput uniqueId)
+    public async Task<ActionResult> DeleteNotification(
+        [FromRoute()] NotificationWhereUniqueInput uniqueId
+    )
     {
         try
         {
@@ -50,8 +52,9 @@ public abstract class NotificationsControllerBase : ControllerBase
     /// Find many Notifications
     /// </summary>
     [HttpGet()]
-    public async Task<ActionResult<List<Notification>>> Notifications([FromQuery()]
-    NotificationFindManyArgs filter)
+    public async Task<ActionResult<List<Notification>>> Notifications(
+        [FromQuery()] NotificationFindManyArgs filter
+    )
     {
         return Ok(await _service.Notifications(filter));
     }
@@ -60,8 +63,9 @@ public abstract class NotificationsControllerBase : ControllerBase
     /// Meta data about Notification records
     /// </summary>
     [HttpPost("meta")]
-    public async Task<ActionResult<MetadataDto>> NotificationsMeta([FromQuery()]
-    NotificationFindManyArgs filter)
+    public async Task<ActionResult<MetadataDto>> NotificationsMeta(
+        [FromQuery()] NotificationFindManyArgs filter
+    )
     {
         return Ok(await _service.NotificationsMeta(filter));
     }
@@ -70,8 +74,9 @@ public abstract class NotificationsControllerBase : ControllerBase
     /// Get one Notification
     /// </summary>
     [HttpGet("{Id}")]
-    public async Task<ActionResult<Notification>> Notification([FromRoute()]
-    NotificationWhereUniqueInput uniqueId)
+    public async Task<ActionResult<Notification>> Notification(
+        [FromRoute()] NotificationWhereUniqueInput uniqueId
+    )
     {
         try
         {
@@ -87,9 +92,10 @@ public abstract class NotificationsControllerBase : ControllerBase
     /// Update one Notification
     /// </summary>
     [HttpPatch("{Id}")]
-    public async Task<ActionResult> UpdateNotification([FromRoute()]
-    NotificationWhereUniqueInput uniqueId, [FromQuery()]
-    NotificationUpdateInput notificationUpdateDto)
+    public async Task<ActionResult> UpdateNotification(
+        [FromRoute()] NotificationWhereUniqueInput uniqueId,
+        [FromQuery()] NotificationUpdateInput notificationUpdateDto
+    )
     {
         try
         {
@@ -107,21 +113,23 @@ public abstract class NotificationsControllerBase : ControllerBase
     /// Get a event record for Notification
     /// </summary>
     [HttpGet("{Id}/event")]
-    public async Task<ActionResult<List<Event>>> GetEvent([FromRoute()]
-    NotificationWhereUniqueInput uniqueId)
+    public async Task<ActionResult<List<Event>>> GetEvent(
+        [FromRoute()] NotificationWhereUniqueInput uniqueId
+    )
     {
-        var event = await _service.GetEvent(uniqueId);
-            return Ok(event); }
+        var eventDbModel = await _service.GetEvent(uniqueId);
+        return Ok(eventDbModel);
+    }
 
     /// <summary>
     /// Get a user record for Notification
     /// </summary>
     [HttpGet("{Id}/user")]
-    public async Task<ActionResult<List<User>>> GetUser([FromRoute()]
-    NotificationWhereUniqueInput uniqueId)
+    public async Task<ActionResult<List<User>>> GetUser(
+        [FromRoute()] NotificationWhereUniqueInput uniqueId
+    )
     {
         var user = await _service.GetUser(uniqueId);
         return Ok(user);
     }
-
 }

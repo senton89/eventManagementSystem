@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
 using EventManagementSystem.APIs;
+using EventManagementSystem.APIs.Common;
 using EventManagementSystem.APIs.Dtos;
 using EventManagementSystem.APIs.Errors;
-using EventManagementSystem.APIs.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EventManagementSystem.APIs;
 
@@ -11,6 +11,7 @@ namespace EventManagementSystem.APIs;
 public abstract class FeedbacksControllerBase : ControllerBase
 {
     protected readonly IFeedbacksService _service;
+
     public FeedbacksControllerBase(IFeedbacksService service)
     {
         _service = service;
@@ -31,8 +32,7 @@ public abstract class FeedbacksControllerBase : ControllerBase
     /// Delete one Feedback
     /// </summary>
     [HttpDelete("{Id}")]
-    public async Task<ActionResult> DeleteFeedback([FromRoute()]
-    FeedbackWhereUniqueInput uniqueId)
+    public async Task<ActionResult> DeleteFeedback([FromRoute()] FeedbackWhereUniqueInput uniqueId)
     {
         try
         {
@@ -50,8 +50,9 @@ public abstract class FeedbacksControllerBase : ControllerBase
     /// Find many Feedbacks
     /// </summary>
     [HttpGet()]
-    public async Task<ActionResult<List<Feedback>>> Feedbacks([FromQuery()]
-    FeedbackFindManyArgs filter)
+    public async Task<ActionResult<List<Feedback>>> Feedbacks(
+        [FromQuery()] FeedbackFindManyArgs filter
+    )
     {
         return Ok(await _service.Feedbacks(filter));
     }
@@ -60,8 +61,9 @@ public abstract class FeedbacksControllerBase : ControllerBase
     /// Meta data about Feedback records
     /// </summary>
     [HttpPost("meta")]
-    public async Task<ActionResult<MetadataDto>> FeedbacksMeta([FromQuery()]
-    FeedbackFindManyArgs filter)
+    public async Task<ActionResult<MetadataDto>> FeedbacksMeta(
+        [FromQuery()] FeedbackFindManyArgs filter
+    )
     {
         return Ok(await _service.FeedbacksMeta(filter));
     }
@@ -70,8 +72,9 @@ public abstract class FeedbacksControllerBase : ControllerBase
     /// Get one Feedback
     /// </summary>
     [HttpGet("{Id}")]
-    public async Task<ActionResult<Feedback>> Feedback([FromRoute()]
-    FeedbackWhereUniqueInput uniqueId)
+    public async Task<ActionResult<Feedback>> Feedback(
+        [FromRoute()] FeedbackWhereUniqueInput uniqueId
+    )
     {
         try
         {
@@ -87,9 +90,10 @@ public abstract class FeedbacksControllerBase : ControllerBase
     /// Update one Feedback
     /// </summary>
     [HttpPatch("{Id}")]
-    public async Task<ActionResult> UpdateFeedback([FromRoute()]
-    FeedbackWhereUniqueInput uniqueId, [FromQuery()]
-    FeedbackUpdateInput feedbackUpdateDto)
+    public async Task<ActionResult> UpdateFeedback(
+        [FromRoute()] FeedbackWhereUniqueInput uniqueId,
+        [FromQuery()] FeedbackUpdateInput feedbackUpdateDto
+    )
     {
         try
         {
@@ -107,21 +111,23 @@ public abstract class FeedbacksControllerBase : ControllerBase
     /// Get a event record for Feedback
     /// </summary>
     [HttpGet("{Id}/event")]
-    public async Task<ActionResult<List<Event>>> GetEvent([FromRoute()]
-    FeedbackWhereUniqueInput uniqueId)
+    public async Task<ActionResult<List<Event>>> GetEvent(
+        [FromRoute()] FeedbackWhereUniqueInput uniqueId
+    )
     {
-        var event = await _service.GetEvent(uniqueId);
-            return Ok(event); }
+        var eventDbModel = await _service.GetEvent(uniqueId);
+        return Ok(eventDbModel);
+    }
 
     /// <summary>
     /// Get a user record for Feedback
     /// </summary>
     [HttpGet("{Id}/user")]
-    public async Task<ActionResult<List<User>>> GetUser([FromRoute()]
-    FeedbackWhereUniqueInput uniqueId)
+    public async Task<ActionResult<List<User>>> GetUser(
+        [FromRoute()] FeedbackWhereUniqueInput uniqueId
+    )
     {
         var user = await _service.GetUser(uniqueId);
         return Ok(user);
     }
-
 }
