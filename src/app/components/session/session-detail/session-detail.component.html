@@ -1,0 +1,8 @@
+<!-- src/app/components/session/session-detail/session-detail.component.html -->
+<h1>Сессия</h1>
+<p>Название: {{ session.title }}</p>
+<p>Место: {{ session.location }}</p>
+<p>Начало: {{ session.startTime | date }}</p>
+<p>Конец: {{ session.endTime | date }}</p>
+<a [routerLink]="['/sessions', session.id, 'edit']">Редактировать</a>
+<a routerLink="/sessions">Назад к списку сессий</a>

@@ -1,0 +1,12 @@
+<!-- src/app/components/feedback/feedback-create/feedback-create.component.html -->
+<h1>Создать новый отзыв</h1>
+<form (ngSubmit)="createFeedback()">
+  <label for="comment">Комментарий:</label>
+  <textarea id="comment" [(ngModel)]="feedback.comment" name="comment" required></textarea>
+
+  <label for="rating">Рейтинг:</label>
+  <input id="rating" type="number" [(ngModel)]="feedback.rating" name="rating" min="1" max="5">
+
+  <button type="submit">Создать отзыв</button>
+</form>
+<a routerLink="/feedbacks">Назад к списку отзывов</a>

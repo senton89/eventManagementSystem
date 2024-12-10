@@ -1,0 +1,42 @@
+/* src/app/components/notification/notification-detail/notification-detail.component.css */
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 10px 0;
+  color: #555;
+}
+
+.date-sent {
+  font-style: italic; /* Курсив для даты отправки */
+  color: #777; /* Более светлый цвет для даты */
+}
+
+a {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 10px 15px;
+  background-color: #007bff; /* Цвет фона для кнопок */
+  color: white; /* Цвет текста */
+  text-decoration: none; /* Убираем подчеркивание */
+  border-radius: 4px; /* Закругленные углы */
+  transition: background-color 0.3s; /* Плавный переход для фона */
+}
+
+a:hover {
+  background-color: #0056b3; /* Цвет фона при наведении */
+}
+
+.back-link {
+  background-color: #6c757d; /* Цвет для кнопки "Назад" */
+}
+
+.back-link:hover {
+  background-color: #5a6268; /* Цвет фона при наведении для кнопки "Назад" */
+}

@@ -1,0 +1,16 @@
+<!-- src/app/components/participant-registration/participant-registration-create/participant-registration-create.component.html -->
+<h1>Создать новую регистрацию участника</h1>
+<form (ngSubmit)="createRegistration()">
+  <label for="user">Пользователь:</label>
+  <input id="user" [(ngModel)]="registration.user" name="user" required>
+
+  <label for="status">Статус:</label>
+  <select id="status" [(ngModel)]="registration.status" name="status">
+    <option value="Pending">Ожидает</option>
+    <option value="Confirmed">Подтверждено</option>
+    <option value="Cancelled">Отменено</option>
+  </select>
+
+  <button type="submit">Создать регистрацию</button>
+</form>
+<a routerLink="/participant-registrations">Назад к списку регистраций</a>

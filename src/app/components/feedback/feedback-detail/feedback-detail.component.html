@@ -1,0 +1,6 @@
+<!-- src/app/components/feedback/feedback-detail/feedback-detail.component.html -->
+<h1>Отзыв</h1>
+<p>{{ feedback.comment }}</p>
+<p>Рейтинг: {{ feedback.rating }}</p>
+<a [routerLink]="['/feedbacks', feedback.id, 'edit']">Редактировать</a>
+<a routerLink="/feedbacks">Назад к списку отзывов</a>

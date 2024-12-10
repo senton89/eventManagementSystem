@@ -1,0 +1,37 @@
+/* src/app/components/participant-registration/participant-registration-detail/participant-registration-detail.component.css */
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px; /* Размер шрифта для текста */
+  line-height: 1.5; /* Межстрочный интервал */
+  margin: 10px 0; /* Отступы между параграфами */
+  color: #555; /* Цвет текста */
+}
+
+a {
+  display: inline-block; /* Делаем ссылки блочными элементами */
+  margin: 10px 0; /* Отступы между ссылками */
+  padding: 10px 15px; /* Отступы внутри ссылок */
+  background-color: #007bff; /* Цвет фона для кнопок */
+  color: white; /* Цвет текста */
+  text-decoration: none; /* Убираем подчеркивание */
+  border-radius: 4px; /* Закругленные углы */
+  transition: background-color 0.3s; /* Плавный переход для фона */
+}
+
+a:hover {
+  background-color: #0056b3; /* Цвет фона при наведении */
+}
+
+.back-link {
+  background-color: #6c757d; /* Цвет для кнопки "Назад" */
+}
+
+.back-link:hover {
+  background-color: #5a6268; /* Цвет фона при наведении для кнопки "Назад" */
+}

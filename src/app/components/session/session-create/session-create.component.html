@@ -1,0 +1,18 @@
+<!-- src/app/components/session/session-create/session-create.component.html -->
+<h1>Создать новую сессию</h1>
+<form (ngSubmit)="createSession()">
+  <label for="title">Название:</label>
+  <input id="title" [(ngModel)]="session.title" name="title" required>
+
+  <label for="location">Место:</label>
+  <input id="location" [(ngModel)]="session.location" name="location">
+
+  <label for="startTime">Начало:</label>
+  <input id="startTime" type="datetime-local" [(ngModel)]="session.startTime" name="startTime">
+
+  <label for="endTime">Конец:</label>
+  <input id="endTime" type="datetime-local" [(ngModel)]="session.endTime" name="endTime">
+
+  <button type="submit">Создать сессию</button>
+</form>
+<a routerLink="/sessions">Назад к списку сессий</a>

@@ -1,0 +1,6 @@
+<!-- src/app/components/notification/notification-detail/notification-detail.component.html -->
+<h1>Уведомление</h1>
+<p>{{ notification.message }}</p>
+<p>Дата отправки: {{ notification.dateSent | date }}</p>
+<a [routerLink]="['/notifications', notification.id, 'edit']">Редактировать</a>
+<a routerLink="/notifications">Назад к списку уведомлений</a>

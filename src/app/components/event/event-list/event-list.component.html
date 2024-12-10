@@ -1,0 +1,8 @@
+<!-- src/app/components/event/event-list/event-list.component.html -->
+<h1>Список событий</h1>
+<ul>
+  <li *ngFor="let event of events">
+    <a [routerLink]="['/events', event.id]">{{ event.title }}</a>
+  </li>
+</ul>
+<a routerLink="/events/create">Создать новое событие</a>

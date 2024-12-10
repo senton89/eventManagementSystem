@@ -1,0 +1,6 @@
+<!-- src/app/components/participant-registration/participant -registration-detail/participant-registration-detail.component.html -->
+<h1>Регистрация участника</h1>
+<p>Пользователь: {{ registration.user }}</p>
+<p>Статус: {{ registration.status }}</p>
+<a [routerLink]="['/participant-registrations', registration.id, 'edit']">Редактировать</a>
+<a routerLink="/participant-registrations">Назад к списку регистраций</a>

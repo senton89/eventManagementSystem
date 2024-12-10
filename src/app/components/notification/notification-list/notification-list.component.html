@@ -1,0 +1,8 @@
+<!-- src/app/components/notification/notification-list/notification-list.component.html -->
+<h1>Список уведомлений</h1>
+<ul>
+  <li *ngFor="let notification of notifications">
+    <a [routerLink]="['/notifications', notification.id]">{{ notification.message }}</a>
+  </li>
+</ul>
+<a routerLink="/notifications/create">Создать новое уведомление</a>

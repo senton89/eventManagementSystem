@@ -1,0 +1,8 @@
+<!-- src/app/components/feedback/feedback-list/feedback-list.component.html -->
+<h1>Список отзывов</h1>
+<ul>
+  <li *ngFor="let feedback of feedbacks">
+    <a [routerLink]="['/feedbacks', feedback.id]">{{ feedback.comment }}</a>
+  </li>
+</ul>
+<a routerLink="/feedbacks/create">Создать новый отзыв</a>

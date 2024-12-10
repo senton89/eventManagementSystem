@@ -1,0 +1,67 @@
+/* src/app/components/event/event-create/event-create.component.css */
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+form {
+  max-width: 600px; /* Ограничиваем ширину формы */
+  margin: 0 auto; /* Центрируем форму */
+  padding: 20px;
+  border: 1px solid #ccc; /* Добавляем рамку */
+  border-radius: 8px; /* Закругляем углы */
+  background-color: #f9f9f9; /* Цвет фона формы */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+}
+
+label {
+  display: block; /* Делаем метки блочными элементами */
+  margin-bottom: 5px; /* Отступ снизу */
+  font-weight: bold; /* Жирный шрифт для меток */
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%; /* Ширина 100% */
+  padding: 10px; /* Отступы внутри полей */
+  margin-bottom: 15px; /* Отступ снизу */
+  border: 1px solid #ccc; /* Рамка */
+  border-radius: 4px; /* Закругленные углы */
+  font-size: 16px; /* Размер шрифта */
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+  border-color: #007bff; /* Цвет рамки при фокусе */
+  outline: none; /* Убираем стандартный контур */
+}
+
+button {
+  background-color: #007bff; /* Цвет фона кнопки */
+  color: white; /* Цвет текста кнопки */
+  border: none; /* Убираем рамку */
+  padding: 10px 15px; /* Отступы внутри кнопки */
+  border-radius: 4px; /* Закругленные углы */
+  cursor: pointer; /* Указатель при наведении */
+  font-size: 16px; /* Размер шрифта */
+}
+
+button:hover {
+  background-color: #0056b3; /* Цвет фона кнопки при наведении */
+}
+
+a {
+  display: block; /* Делаем ссылку блочным элементом */
+  text-align: center; /* Центрируем текст ссылки */
+  margin-top: 20px; /* Отступ сверху */
+  color: #007bff; /* Цвет ссылки */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+a:hover {
+  text-decoration: underline; /* Подчеркивание при наведении */
+}

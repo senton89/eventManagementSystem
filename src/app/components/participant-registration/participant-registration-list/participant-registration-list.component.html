@@ -1,0 +1,8 @@
+<!-- src/app/components/participant-registration/participant-registration-list/participant-registration-list.component.html -->
+<h1>Список регистраций участников</h1>
+<ul>
+  <li *ngFor="let registration of registrations">
+    <a [routerLink]="['/participant-registrations', registration.id]">{{ registration.user }}</a>
+  </li>
+</ul>
+<a routerLink="/participant-registrations/create">Создать новую регистрацию</a>

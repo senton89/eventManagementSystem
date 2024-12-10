@@ -1,0 +1,18 @@
+<!-- src/app/components/event/event-create/event-create.component.html -->
+<h1>Создать новое событие</h1>
+<form (ngSubmit)="createEvent()">
+  <label for="title">Название:</label>
+  <input id="title" [(ngModel)]="event.title" name="title" required>
+
+  <label for="description">Описание:</label>
+  <textarea id="description" [(ngModel)]="event.description" name="description"></textarea>
+
+  <label for="date">Дата:</label>
+  <input id="date" type="date" [(ngModel)]="event.date" name="date">
+
+  <label for="location">Место:</label>
+  <input id="location" [(ngModel)]="event.location" name="location">
+
+  <button type="submit">Создать событие</button>
+</form>
+<a routerLink="/events">Назад к списку событий</a>

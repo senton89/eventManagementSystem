@@ -1,0 +1,8 @@
+<!-- src/app/components/session/session-list/session-list.component.html -->
+<h1>Список сессий</h1>
+<ul>
+  <li *ngFor="let session of sessions">
+    <a [routerLink]="['/sessions', session.id]">{{ session.title }}</a>
+  </li>
+</ul>
+<a routerLink="/sessions/create">Создать новую сессию</a>

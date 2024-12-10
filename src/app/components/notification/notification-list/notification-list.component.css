@@ -1,0 +1,52 @@
+/* src/app/components/notification/notification-list/notification-list.component.css */
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none; /* Убираем маркеры списка */
+  padding: 0; /* Убираем отступы */
+  max-width: 600px; /* Ограничиваем ширину списка */
+  margin: 0 auto; /* Центрируем список */
+}
+
+li {
+  background-color: #f9f9f9; /* Цвет фона для каждого уведомления */
+  border: 1px solid #ccc; /* Рамка вокруг каждого уведомления */
+  border-radius: 4px; /* Закругленные углы */
+  padding: 15px; /* Отступы внутри элемента списка */
+  margin-bottom: 10px; /* Отступ между уведомлениями */
+  transition: background-color 0.3s; /* Плавный переход для фона */
+}
+
+li:hover {
+  background-color: #e9ecef; /* Цвет фона при наведении */
+}
+
+a {
+  text-decoration: none; /* Убираем подчеркивание */
+  color: #007bff; /* Цвет текста для ссылок */
+  font-weight: bold; /* Жирный шрифт для ссылок */
+}
+
+a:hover {
+  text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+.create-notification {
+  display: block; /* Делаем ссылку блочным элементом */
+  text-align: center; /* Центрируем текст */
+  margin-top: 20px; /* Отступ сверху */
+  padding: 10px 15px; /* Отступы внутри */
+  background-color: #28a745; /* Цвет фона для кнопки создания уведомления */
+  color: white; /* Цвет текста */
+  border-radius: 4px; /* Закругленные углы */
+  transition: background-color 0.3s; /* Плавный переход для фона */
+}
+
+.create-notification:hover {
+  background-color: #218838; /* Цвет фона при наведении */
+}
